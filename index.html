@@ -19,53 +19,44 @@
 </head>
 
 <!-- Birthday Music Button -->
-<style>
-    #musicBtn {
-        background: linear-gradient(135deg, #ff69b4, #ff1493);
-        color: white;
-        border: none;
-        padding: 12px 25px;
-        border-radius: 30px;
-        font-size: 17px;
-        font-weight: bold;
-        cursor: pointer;
-        box-shadow: 0 4px 12px rgba(255, 20, 147, 0.3);
-        margin: 20px;
-    }
 
-    #musicBtn:hover {
-        transform: scale(1.05);
-    }
-</style>
-
-<div style="text-align:center;">
+<!-- Birthday Music -->
+<div style="text-align:center; margin:20px;">
     <button id="musicBtn" onclick="toggleMusic()">
         🎵 Play Birthday Song
     </button>
+
+    <br><br>
+
+    <audio id="birthdayMusic" controls loop>
+        <source src="./birthday.mp3" type="audio/mpeg">
+        Your browser does not support audio.
+    </audio>
 </div>
 
-<audio id="birthdayMusic" loop>
-    <source src="birthday.mp3" type="audio/mpeg">
-</audio>
-
 <script>
-    function toggleMusic() {
-        const music = document.getElementById("birthdayMusic");
-        const button = document.getElementById("musicBtn");
+const music = document.getElementById("birthdayMusic");
+const button = document.getElementById("musicBtn");
 
-        if (music.paused) {
-            music.play().then(() => {
-                button.innerHTML = "⏸ Pause Music";
-            }).catch(() => {
-                alert("Please check your birthday.mp3 file!");
-            });
-        } else {
-            music.pause();
-            button.innerHTML = "🎵 Play Birthday Song";
-        }
+function toggleMusic() {
+    if (music.paused) {
+        music.play().then(() => {
+            button.innerText = "⏸ Pause Music";
+        }).catch(error => {
+            alert("Song error: " + error.message);
+        });
+    } else {
+        music.pause();
+        button.innerText = "🎵 Play Birthday Song";
     }
+}
+
+music.addEventListener("error", function() {
+    alert("MP3 file not found or unsupported format!");
+});
 </script>
 </body>
+
 
 <body>
     <div id="wrapper">
