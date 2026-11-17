@@ -18,6 +18,55 @@
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 
+<!-- Birthday Music Button -->
+<style>
+    #musicBtn {
+        background: linear-gradient(135deg, #ff69b4, #ff1493);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 30px;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(255, 20, 147, 0.3);
+        margin: 20px;
+    }
+
+    #musicBtn:hover {
+        transform: scale(1.05);
+    }
+</style>
+
+<div style="text-align:center;">
+    <button id="musicBtn" onclick="toggleMusic()">
+        🎵 Play Birthday Song
+    </button>
+</div>
+
+<audio id="birthdayMusic" loop>
+    <source src="birthday.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+    function toggleMusic() {
+        const music = document.getElementById("birthdayMusic");
+        const button = document.getElementById("musicBtn");
+
+        if (music.paused) {
+            music.play().then(() => {
+                button.innerHTML = "⏸ Pause Music";
+            }).catch(() => {
+                alert("Please check your birthday.mp3 file!");
+            });
+        } else {
+            music.pause();
+            button.innerHTML = "🎵 Play Birthday Song";
+        }
+    }
+</script>
+</body>
+
 <body>
     <div id="wrapper">
         <div class="flag__birthday">
